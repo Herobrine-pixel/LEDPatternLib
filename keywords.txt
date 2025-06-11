@@ -1,0 +1,6 @@
+LEDPatternLib    keyword1
+begin            function
+setBrightness    function
+blink            function
+rainbowCycle     function
+knightRider      function
