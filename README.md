@@ -56,5 +56,8 @@ void loop() {
 
 MIT License – free to use, modify, and distribute.
 
+## Developer 
+Herobrine Pixel 2025
+
 ---
 Happy blinking! 🎉
