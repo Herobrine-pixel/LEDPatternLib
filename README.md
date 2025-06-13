@@ -80,4 +80,4 @@ SOFTWARE.
 Herobrine Pixel 2025
 
 ---
-Happy blinking! 🎉
+# Happy blinking! 🎉
