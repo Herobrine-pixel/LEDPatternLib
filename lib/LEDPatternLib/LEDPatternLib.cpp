@@ -1,56 +1,50 @@
 #include "LEDPatternLib.h"
 
-LEDPatternLib::LEDPatternLib(uint8_t pin) : _pin(pin) {}
+LEDPatternLib::LEDPatternLib(uint8_t pin, uint16_t numPixels)
+    : _strip(numPixels, pin, NEO_GRB + NEO_KHZ800), _numPixels(numPixels) {}
 
 void LEDPatternLib::begin() {
-  pinMode(_pin, OUTPUT);
+    _strip.begin();
+    _strip.show();
+    _strip.setBrightness(255);
 }
 
-void LEDPatternLib::blink(unsigned long delay_ms) {
-  digitalWrite(_pin, HIGH);
-  delay(delay_ms);
-  digitalWrite(_pin, LOW);
-  delay(delay_ms);
+void LEDPatternLib::setBrightness(uint8_t brightness) {
+    _strip.setBrightness(brightness);
+    _strip.show();
+}
+
+void LEDPatternLib::blink(uint32_t color, uint16_t delay_ms) {
+    _strip.fill(color, 0, _numPixels);
+    _strip.show();
+    delay(delay_ms);
+    _strip.clear();
+    _strip.show();
+    delay(delay_ms);
 }
 
 void LEDPatternLib::rainbowCycle(uint8_t wait) {
-  for (int j = 0; j < 256; j++) {
-    analogWrite(_pin, (sin(j * 3.14 / 128) + 1) * 127);
-    delay(wait);
-  }
+    for (long firstPixelHue = 0; firstPixelHue < 5 * 65536; firstPixelHue += 256) {
+        for (int i = 0; i < _strip.numPixels(); i++) {
+            int pixelHue = firstPixelHue + (i * 65536L / _strip.numPixels());
+            _strip.setPixelColor(i, _strip.gamma32(_strip.ColorHSV(pixelHue)));
+        }
+        _strip.show();
+        delay(wait);
+    }
 }
 
-void LEDPatternLib::knightRider(uint8_t speed) {
-  for (int i = 0; i < 255; i += 5) {
-    analogWrite(_pin, i);
-    delay(speed);
-  }
-  for (int i = 255; i >= 0; i -= 5) {
-    analogWrite(_pin, i);
-    delay(speed);
-  }
-}
-
-void LEDPatternLib::colorWipe(uint32_t color, int delay_ms) {
-  digitalWrite(_pin, HIGH);
-  delay(delay_ms);
-  digitalWrite(_pin, LOW);
-  delay(delay_ms);
-}
-
-uint32_t LEDPatternLib::Wheel(byte WheelPos) {
-  WheelPos = 255 - WheelPos;
-  if (WheelPos < 85) {
-    return ((255 - WheelPos * 3) << 16) | (0 << 8) | (WheelPos * 3);
-  }
-  if (WheelPos < 170) {
-    WheelPos -= 85;
-    return (0 << 16) | (WheelPos * 3 << 8) | (255 - WheelPos * 3);
-  }
-  WheelPos -= 170;
-  return (WheelPos * 3 << 16) | (255 - WheelPos * 3 << 8) | 0;
-}
-
-void LEDPatternLib::showColor(uint32_t color) {
-  digitalWrite(_pin, HIGH);
+void LEDPatternLib::knightRider(uint32_t color, uint8_t speed) {
+    for (int i = 0; i < _numPixels; i++) {
+        _strip.clear();
+        _strip.setPixelColor(i, color);
+        _strip.show();
+        delay(speed);
+    }
+    for (int i = _numPixels - 2; i > 0; i--) {
+        _strip.clear();
+        _strip.setPixelColor(i, color);
+        _strip.show();
+        delay(speed);
+    }
 }
