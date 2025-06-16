@@ -1,6 +1,7 @@
-LEDPatternLib    keyword1
-begin            function
-setBrightness    function
-blink            function
-rainbowCycle     function
-knightRider      function
+LEDPatternLib     KEYWORD1
+begin             KEYWORD2
+setBrightness     KEYWORD2
+blink             KEYWORD2
+rainbowCycle      KEYWORD2
+knightRider       KEYWORD2
+Adafruit_NeoPixel KEYWORD3
