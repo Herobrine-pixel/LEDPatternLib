@@ -1,0 +1,44 @@
+# Compiled object files
+*.o
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.a
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Arduino specific
+*.bin
+*.hex
+*.eep
+*.elf
+
+# Build folders
+build/
+.pio/
+.vscode/
+
+# PlatformIO specific
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.idea/
+*.swp
+*.swo
+*.bak
+*.d
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
