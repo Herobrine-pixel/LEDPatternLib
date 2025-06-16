@@ -1,60 +1,116 @@
 # LEDPatternLib
 
-**LEDPatternLib** is a versatile and easy-to-use Arduino library for controlling various LED patterns on both built-in and external LEDs, including NeoPixel (WS2812) and DotStar (APA102) strips.
+**Author:** Herobrine Pixel  
+**License:** MIT  
+**Version:** 1.0.1 
 
-## ✨ Features
+---
 
-- Predefined LED patterns like:
-  - Blink
-  - Breathing
-  - Rainbow Cycle
-  - Knight Rider
-  - Twinkle
-  - Theater Chase
-  - Color Wipe
-- Supports built-in LED, NeoPixel, and DotStar strips
-- Adjustable speed, brightness, and colors
-- Uses non-blocking timing (no `delay()`)
-- Beginner-friendly API
+## 🌈 LEDPatternLib — Versatile LED Pattern Library (NeoPixel Edition)
 
-## 🧰 Hardware Requirements
+`LEDPatternLib` is a lightweight, modular Arduino library for displaying various LED animations such as **blink**, **rainbow**, and **Knight Rider** patterns. This version is built specifically for **NeoPixel (WS2812)** LEDs using the [Adafruit NeoPixel library](https://github.com/adafruit/Adafruit_NeoPixel).
 
+---
+
+## ✅ Features
+
+- Supports **WS2812 / WS2812B NeoPixel strips**
+- Easy-to-use animation functions
+- Smooth and non-blocking LED effects
+- Designed for beginners and hobbyists
+
+---
+
+## 🔌 Wiring Instructions
+
+### 🧾 Requirements
 - Arduino Uno, Nano, Mega, ESP32, etc.
-- WS2812/APA102 LED strip or built-in LED
+- NeoPixel Strip (WS2812 or compatible)
+- 470Ω resistor (recommended for signal line)
+- 1000 µF capacitor (recommended across VCC-GND)
+- External 5V power supply (if powering many LEDs)
 
-## 🔌 Wiring Example (for WS2812)
+### 🪛 Circuit Connections
 
-- **LED Strip DIN** → Arduino Pin 6 (default)
-- **GND** → Arduino GND
-- **VCC** → 5V (or external power supply)
-- *Use a 470Ω resistor on DIN and 1000µF capacitor across VCC-GND for stability*
+| NeoPixel Pin | Connect To Arduino |
+|--------------|--------------------|
+| **GND**      | GND                |
+| **VCC (5V)** | 5V (or external)   |
+| **DIN**      | Digital Pin (e.g., D6) via 470Ω resistor |
+
+💡 **Important:**  
+For more than 8–10 LEDs, use an **external 5V power supply** and **common ground** between Arduino and power supply.
+
+---
 
 ## 📦 Installation
 
-1. Download the library as ZIP
-2. Open Arduino IDE → Sketch → Include Library → Add .ZIP Library
-3. Select `LEDPatternLib.zip`
+### Arduino IDE:
+1. Go to **Sketch > Include Library > Add .ZIP Library…**
+2. Select the downloaded `LEDPatternLib.zip` file
+3. Install the **Adafruit NeoPixel** library:  
+   Go to **Tools > Manage Libraries**, search for **Adafruit NeoPixel**, and install it.
 
-## 🧪 Example
+---
+
+## 📄 Example
 
 ```cpp
+#include <Adafruit_NeoPixel.h>
 #include <LEDPatternLib.h>
 
-LEDPatternLib ledPatterns(6); // Pin 6 by default
+#define PIN 6
+#define NUMPIXELS 8
+
+LEDPatternLib pattern(PIN, NUMPIXELS);
 
 void setup() {
-  ledPatterns.begin();
-  ledPatterns.setBrightness(100);
+  pattern.begin();
 }
 
 void loop() {
-  ledPatterns.rainbowCycle();
+  pattern.blink(0x00FF00, 300);         // Green blink
+  pattern.knightRider(0xFF0000, 80);    // Red Knight Rider
+  pattern.rainbowCycle(10);             // Rainbow animation
 }
 ```
 
-## 🪪 License
+---
 
-MIT License
+## 🧠 API Reference
+
+### Constructor:
+```cpp
+LEDPatternLib(uint8_t pin, uint16_t numPixels);
+```
+
+### Methods:
+- `void begin();`  
+  Initializes the LED strip.
+
+- `void setBrightness(uint8_t brightness);`  
+  Set brightness (0–255).
+
+- `void blink(uint32_t color, uint16_t delay_ms = 500);`  
+  Blink with a solid color.
+
+- `void rainbowCycle(uint8_t wait = 20);`  
+  Rainbow animation.
+
+- `void knightRider(uint32_t color = 0xFF0000, uint8_t speed = 50);`  
+  Knight Rider-style bouncing LED.
+
+---
+
+## 🧪 Tested On
+
+- Arduino Uno ✅  
+- ESP32 DevKit v1 ✅  
+- WS2812B LED Strip ✅
+
+---
+
+## 📖 License
 
 Copyright (c) 2025 Herobrine Sah
 
@@ -76,8 +132,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Developer 
-Herobrine Pixel 2025
+
 
 ---
-# Happy blinking! 🎉
+
+## 🔗 Repository
+
+GitHub: [https://github.com/Herobrine-pixel/LEDPatternLib](https://github.com/Herobrine-pixel/LEDPatternLib)
