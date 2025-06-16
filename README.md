@@ -12,13 +12,13 @@
 
 ---
 
-## ✅ Features
-
-- Supports **WS2812 / WS2812B NeoPixel strips**
-- Easy-to-use animation functions
-- Smooth and non-blocking LED effects
-- Designed for beginners and hobbyists
-
+## 🔌 Features
+- Support for NeoPixel WS2812/APA102
+- Built-in LED blinking
+- Predefined effects: blink, rainbow, knight rider
+- Adjustable brightness
+- Works with Arduino and PlatformIO
+  
 ---
 
 ## 🔌 Wiring Instructions
@@ -31,6 +31,9 @@
 - External 5V power supply (if powering many LEDs)
 
 ### 🪛 Circuit Connections
+
+### Built-in LED
+- No wiring needed if using pin 13 (on most Arduino boards).
 
 | NeoPixel Pin | Connect To Arduino |
 |--------------|--------------------|
@@ -52,26 +55,21 @@ For more than 8–10 LEDs, use an **external 5V power supply** and **common grou
    Go to **Tools > Manage Libraries**, search for **Adafruit NeoPixel**, and install it.
 
 ---
-
-## 📄 Example
-
+## Example Usage
 ```cpp
-#include <Adafruit_NeoPixel.h>
 #include <LEDPatternLib.h>
-
-#define PIN 6
-#define NUMPIXELS 8
-
-LEDPatternLib pattern(PIN, NUMPIXELS);
+LEDPatternLib led(6, 8); // For NeoPixel
+// LEDPatternLib led(13); // For built-in LED
 
 void setup() {
-  pattern.begin();
+  led.begin();
+  led.setBrightness(150);
 }
 
 void loop() {
-  pattern.blink(0x00FF00, 300);         // Green blink
-  pattern.knightRider(0xFF0000, 80);    // Red Knight Rider
-  pattern.rainbowCycle(10);             // Rainbow animation
+  led.blink(0x00FF00, 500);
+  led.knightRider(0xFF0000, 50);
+  led.rainbowCycle(10);
 }
 ```
 
