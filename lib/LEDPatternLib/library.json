@@ -1,18 +1,42 @@
 {
   "name": "LEDPatternLib",
   "version": "1.0.1",
-  "author": "Herobrine Pixel",
-  "maintainer": "Herobrine Pixel <ashasah77@gmail.com>",
-  "description": "Versatile library for predefined LED patterns (NeoPixel, DotStar, built-in).",
-  "keywords": ["led", "pattern", "animation", "blink", "rainbow", "ws2812", "neopixel"],
+  "description": "Versatile library for predefined LED patterns using NeoPixel LEDs.",
+  "keywords": [
+    "led",
+    "neopixel",
+    "animation",
+    "pattern",
+    "display",
+    "ws2812"
+  ],
+  "authors": [
+    {
+      "name": "Herobrine Pixel",
+      "email": "ashasah77@gmail.com",
+      "maintainer": true
+    }
+  ],
   "license": "MIT",
+  "homepage": "https://github.com/Herobrine-pixel/LEDPatternLib",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Herobrine-pixel/LEDPatternLib"
+    "url": "https://github.com/Herobrine-pixel/LEDPatternLib.git"
   },
-  "frameworks": "arduino",
-  "platforms": "*",
-  "examples": [
-    "examples/BasicPatterns/BasicPatterns.ino"
-  ]
+  "frameworks": ["arduino"],
+  "platforms": ["*"],
+  "dependencies": [
+    {
+      "name": "Adafruit NeoPixel",
+      "version": "*"
+    }
+  ],
+  "export": {
+    "include": [
+      "src/",
+      "library.properties",
+      "README.md",
+      "LICENSE"
+    ]
+  }
 }
