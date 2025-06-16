@@ -1,15 +1,8 @@
 {
   "name": "LEDPatternLib",
   "version": "1.0.1",
-  "description": "Versatile library for predefined LED patterns using NeoPixel LEDs.",
-  "keywords": [
-    "led",
-    "neopixel",
-    "animation",
-    "pattern",
-    "display",
-    "ws2812"
-  ],
+  "description": "Versatile library for predefined LED patterns using NeoPixel or built-in LEDs.",
+  "keywords": ["led", "neopixel", "animation", "pattern", "display", "ws2812"],
   "authors": [
     {
       "name": "Herobrine Pixel",
@@ -30,13 +23,5 @@
       "name": "Adafruit NeoPixel",
       "version": "*"
     }
-  ],
-  "export": {
-    "include": [
-      "src/",
-      "library.properties",
-      "README.md",
-      "LICENSE"
-    ]
-  }
+  ]
 }
